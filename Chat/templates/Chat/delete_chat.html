@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}Delete Chat{% endblock %}
+
+{% block content %}
+    <div class="max-w-3xl mx-auto px-6 py-8">
+        <a href="{% url "all_chats" %}" class="text-blue-600 text-xl font-semibold hover:text-blue-800 transition-colors duration-200">
+            ← Back to All Chats
+        </a>
+        <h1 class="text-4xl font-extrabold mb-6 text-red-600">Confirm Delete</h1>
+
+        <form method="post" enctype="multipart/form-data" class="bg-white p-8 rounded-lg shadow-lg space-y-6">
+            {% csrf_token %}
+            
+            {% if error %}
+                <p class="text-red-500 font-semibold">{{ error }}</p>
+            {% endif %}
+
+            <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                <div class="flex items-center mb-4">
+                    <div class="mr-3 text-lg font-semibold text-gray-900">
+                        {{ chat.user|slice:":1" }}
+                    </div>
+                    <p class="text-sm text-gray-500">{{ chat.created_at|date:"F j, Y, g:i a" }}</p>
+                </div>
+                <p class="text-base text-gray-800 leading-relaxed mb-4">{{ chat.text }}</p>
+
+                {% if chat.attachments %}
+                    <div class="mt-4">
+                        <img src="{{ chat.attachments.url }}" alt="Attachment" class="w-full h-auto rounded-lg shadow-md">
+                    </div>
+                {% endif %}
+            </div>
+
+            <div class="flex justify-between items-center mt-6">
+                <a href="{% url 'all_chats' %}" class="text-gray-500 hover:underline">
+                    Cancel
+                </a>
+                <button type="submit" class="bg-red-500 text-white font-bold px-2 py-2 rounded-lg shadow hover:bg-red-600 focus:outline-none focus:ring-4 focus:ring-red-300 transition duration-200">
+                    Confirm Delete
+                </button>
+            </div>
+        </form>
+    </div>
+{% endblock %}

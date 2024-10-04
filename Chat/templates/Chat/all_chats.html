@@ -1,0 +1,129 @@
+{% extends "layout.html" %}
+
+{% block title %}Chats{% endblock %}
+
+{% block content %}
+    <div class="grid grid-cols-12 h-screen">
+        <!-- Left Sidebar -->
+        <aside class="col-span-2 bg-gray-200 p-4 overflow-y-auto h-full rounded-tl-md rounded-bl-md">
+            <h2 class="text-lg font-semibold mb-4">Navigation</h2>
+            <ul class="space-y-2">
+                <li>
+                    <a href="{% url 'home' %}" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-300 transition duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" class="w-4"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M575.8 255.5c0 18-15 32.1-32 32.1l-32 0 .7 160.2c0 2.7-.2 5.4-.5 8.1l0 16.2c0 22.1-17.9 40-40 40l-16 0c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1L416 512l-24 0c-22.1 0-40-17.9-40-40l0-24 0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32l0 64 0 24c0 22.1-17.9 40-40 40l-24 0-31.9 0c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2l-16 0c-22.1 0-40-17.9-40-40l0-112c0-.9 0-1.9 .1-2.8l0-69.7-32 0c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></svg>
+                        <span class="text-gray-600">Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'all_chats' %}" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-300 transition duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>
+                        <span class="text-gray-600">Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'all_chats' %}" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-300 transition duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>
+                        <span class="text-gray-600">Search</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'create_chat' %}" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-300 transition duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM232 344l0-64-64 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l64 0 0-64c0-13.3 10.7-24 24-24s24 10.7 24 24l0 64 64 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-64 0 0 64c0 13.3-10.7 24-24 24s-24-10.7-24-24z"/></svg>
+                        <span class="text-gray-600">Create</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'all_chats' %}" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-300 transition duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="w-4"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M224 0c-17.7 0-32 14.3-32 32l0 19.2C119 66 64 130.6 64 208l0 18.8c0 47-17.3 92.4-48.5 127.6l-7.4 8.3c-8.4 9.4-10.4 22.9-5.3 34.4S19.4 416 32 416l384 0c12.6 0 24-7.4 29.2-18.9s3.1-25-5.3-34.4l-7.4-8.3C401.3 319.2 384 273.9 384 226.8l0-18.8c0-77.4-55-142-128-156.8L256 32c0-17.7-14.3-32-32-32zm45.3 493.3c12-12 18.7-28.3 18.7-45.3l-64 0-64 0c0 17 6.7 33.3 18.7 45.3s28.3 18.7 45.3 18.7s33.3-6.7 45.3-18.7z"/></svg>                        
+                        <span class="text-gray-600">Notifications</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{% url 'all_chats' %}" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-300 transition duration-200">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-4"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M448 256c0-106-86-192-192-192l0 384c106 0 192-86 192-192zM0 256a256 256 0 1 1 512 0A256 256 0 1 1 0 256z"/></svg>                        
+                        <span class="text-gray-600">All</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="col-span-7 bg-gray-50 p-4 overflow-y-auto">
+            <div class="max-w-4xl mx-auto px-4 py-6">
+                <!-- Buttons in Main Content -->
+                <div class="flex justify-between mb-6">
+                    <div class="flex space-x-4">
+                        <a href="{% url 'all_chats' %}" class="text-base font-semibold hover:underline 
+                            {% if active_section == 'all_chats' %} bg-blue-500 text-white rounded-lg px-4 py-2 
+                            {% else %} text-blue-500 border border-blue-500 rounded-lg px-4 py-2 {% endif %}">
+                            All Chats
+                        </a>
+                        <a href="{% url 'my_chats' %}" class="text-base font-semibold hover:underline 
+                            {% if active_section == 'my_chats' %} bg-blue-500 text-white rounded-lg px-4 py-2 
+                            {% else %} text-blue-500 border border-blue-500 rounded-lg px-4 py-2 {% endif %}">
+                            My Chats
+                        </a>
+                    </div>
+                    <a href="{% url 'create_chat' %}" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-200">
+                        + Create Chat
+                    </a>
+                </div>
+
+                {% if chats %}
+                    {% for chat in chats %}
+                        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <div class="flex items-center">
+                                    <div class="mr-3 text-lg font-semibold text-gray-900">
+                                        {{ chat.user.username.capitalize }}
+                                    </div>
+                                    <p class="text-sm text-gray-500">{{ chat.created_at|date:"F j, Y, g:i a" }}</p>
+                                </div>
+                                {% if chat.user == user %}
+                                    <div class="space-x-4">
+                                        <a href="{% url 'edit_chat' chat.id %}" class="text-blue-500 hover:underline font-semibold">
+                                            Edit
+                                        </a>
+                                        <a href="{% url 'delete_chat' chat.id %}" class="text-red-500 hover:underline font-semibold">
+                                            Delete
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            </div>
+
+                            <p class="text-base text-gray-800 leading-relaxed mb-4">{{ chat.text }}</p>
+
+                            {% if chat.attachments %}
+                                <div class="mt-4">
+                                    <img src="{{ chat.attachments.url }}" alt="Attachment" class="w-full h-auto rounded-lg shadow-sm">
+                                </div>
+                            {% endif %}
+
+                            <!-- Like and Rechat Buttons -->
+                            <div class="flex items-center mt-4 space-x-4">
+                                <a href="{% url 'like_chat' chat.id %}" class="flex items-center space-x-2 text-blue-500 hover:underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                                    <span>{{ chat.like_count }} Likes</span>
+                                </a>
+                                <a href="{% url 'all_chats'%}" class="flex items-center space-x-2 text-blue-500 hover:underline">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-5 h-5"><path d="M16 11V4c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v7H1v6h2v5h4v-5h6v5h4v-5h2v-6h-2zm-2 0H7v-5h7v5zm0 0H7v-5h7v5z"/></svg>
+                                    <span>{{ chat.rechat_count }} Rechats</span>
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <p class="text-gray-500">No chats available.</p>
+                {% endif %}
+            </div>
+        </main>
+
+        <!-- Right Sidebar -->
+        <aside class="col-span-3 bg-gray-200 p-4 overflow-y-auto h-full rounded-br-md rounded-tr-md">
+            <h2 class="text-lg font-semibold mb-4 ml-1">Current User</h2>
+            <div class="bg-white p-4 rounded-lg shadow-md">
+                <p class="font-semibold">{{ user.username.capitalize }}</p>
+            </div>
+        </aside>
+    </div>
+{% endblock %}

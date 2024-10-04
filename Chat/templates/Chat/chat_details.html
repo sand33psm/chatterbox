@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+
+{% block title %}Chat Detail{% endblock %}
+
+{% block content %}
+    <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex items-center">
+                <div class="mr-3 text-lg font-semibold text-gray-900">
+                    {{ chat.user.username }}
+                </div>
+                <p class="text-sm text-gray-500">{{ chat.created_at|date:"F j, Y, g:i a" }}</p>
+            </div>
+            {% if chat.user == user %}
+                <div class="space-x-4">
+                    <a href="{% url 'edit_chat' chat.id %}" class="text-blue-500 hover:underline font-semibold">
+                        Edit
+                    </a>
+                    <a href="{% url 'delete_chat' chat.id %}" class="text-red-500 hover:underline font-semibold">
+                        Delete
+                    </a>
+                </div>
+            {% endif %}
+        </div>
+
+        <p class="text-base text-gray-800 leading-relaxed mb-4">{{ chat.text }}</p>
+
+        {% if chat.attachments %}
+            <div class="mt-4">
+                <img src="{{ chat.attachments.url }}" alt="Attachment" class="w-full h-auto rounded-lg shadow-sm">
+            </div>
+        {% endif %}
+
+        <!-- Rechat Form -->
+        <h3 class="text-lg font-semibold mt-6">Rechat</h3>
+        <form method="post" action="{% url 'chat_detail' chat.id %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-200">
+                Rechat
+            </button>
+        </form>
+
+        <!-- Display Rechats -->
+        <h3 class="text-lg font-semibold mt-6">Rechats</h3>
+        {% if chat.rechats.all %}
+            <ul class="space-y-4">
+                {% for rechat in chat.rechats.all %}
+                    <li class="bg-gray-100 p-4 rounded-lg shadow-sm">
+                        <p class="text-base text-gray-800">{{ rechat.text }}</p>
+                        <p class="text-sm text-gray-500">Rechat by {{ rechat.user.username }} on {{ rechat.created_at|date:"F j, Y, g:i a" }}</p>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="text-gray-500">No rechats yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}
